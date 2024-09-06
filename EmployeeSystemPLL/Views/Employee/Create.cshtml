@@ -1,0 +1,55 @@
+﻿@model CreateEmployeeVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var departments = ViewBag.Departments;
+}
+<h1>Create</h1>
+
+<form asp-action="Create" asp-controller="Employee">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Name</label>
+        <input type="text" class="form-control" asp-for="Name" placeholder="Enter Name">
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Age</label>
+        <input type="number" class="form-control" asp-for="Age" placeholder="Enter Name">
+        <span asp-validation-for="Age"></span>
+
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Salary</label>
+        <input type="number" class="form-control" asp-for="Salary" placeholder="Enter Salary">
+        <span asp-validation-for="Salary"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Department</label>
+        <select class="form-control" asp-for="DepartmentName">
+            @if (departments != null)
+            {
+                for (int i = 0; i < departments.Count; i++)
+                {
+                    <option value="@departments[i].Name">@departments[i].Name</option>
+                }
+            }
+            else
+            {
+                <option>No departments available</option>
+            }
+        </select>
+
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email</label>
+        <input type="email" class="form-control" asp-for="Email" placeholder="Enter Email">
+        <span asp-validation-for="Email"></span>
+
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    <button asp-action="Index" asp-controller="Home" class="btn btn-danger mt-3">Cancel</button>
+</form>
+<button type="submit" class="btn btn-primary mt-3" asp-action="Create" asp-controller="Department" >Create Department</button>
